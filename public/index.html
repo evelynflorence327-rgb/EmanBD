@@ -1,1504 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Eman 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            background: #000;
-            color: #fff;
-            perspective: 1000px;
-        }
-
-        .restricted-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 1s;
-            text-align: center;
-            padding: 20px;
-            overflow: hidden;
-        }
-
-        .restricted-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: url('EZcollage.jpg') center center/cover no-repeat;
-            opacity: 0.25;
-            pointer-events: none;
-        }
-
-        .restricted-screen > *:not(.restricted-bg) {
-            position: relative;
-            z-index: 1;
-        }
-
-        .restricted-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: url('EZcollage.jpg') center center/cover no-repeat;
-            opacity: 0.25;
-            pointer-events: none;
-        }
-
-        .restricted-screen > *:not(.restricted-bg) {
-            position: relative;
-            z-index: 1;
-        }
-
-        .restricted-screen.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .restricted-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 5em;
-            margin-bottom: 20px;
-            margin-top: 20px; /* Add this line */
-            animation: glow 2s ease-in-out infinite alternate;
-            padding-top: 10px;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de; }
-            to { text-shadow: 0 0 30px #fff, 0 0 40px #ff00de, 0 0 50px #ff00de; }
-        }
-
-        .restricted-note {
-            font-size: 1.5em;
-            max-width: 600px;
-            margin-bottom: 40px;
-            font-family: 'Great Vibes', cursive;
-            color: #fff;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.5s;
-        }
-
-        .birthday-countdown {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 40px;
-            animation: pulse 2s infinite;
-        }
-
-        .birthday-countdown-title {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .countdown-timer {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .countdown-item {
-            text-align: center;
-        }
-
-        .countdown-value {
-            font-size: 3em;
-            font-weight: 700;
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .calendar {
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            color: #333;
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .calendar-body {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-        }
-
-        .calendar-day {
-            text-align: center;
-            padding: 10px;
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-
-        .calendar-day:hover {
-            background: #f093fb;
-            color: white;
-        }
-
-        .calendar-day.birthday {
-            background: #ff00de;
-            color: white;
-            animation: pulse 1s infinite;
-        }
-
-        .calendar-weekday {
-            font-weight: bold;
-            color: #764ba2;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .main-container {
-            display: none;
-        }
-
-        .main-container.active {
-            display: block;
-        }
-
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 6em;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeInScale 1.5s forwards;
-            transform: rotateY(10deg);
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.5) rotateY(20deg);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) rotateY(0);
-            }
-        }
-
-        .hero-date {
-            font-size: 2em;
-            font-weight: 300;
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeIn 2s forwards 1s;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            animation: bounce 2s infinite;
-            font-size: 2em;
-            opacity: 0.7;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
-        }
-
-        .heart-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        .floating-heart {
-            position: absolute;
-            font-size: 30px;
-            animation: floatUp 6s linear infinite;
-            opacity: 0;
-            filter: drop-shadow(0 0 10px #ff00de);
-        }
-
-        @keyframes floatUp {
-            0% {
-                opacity: 0;
-                transform: translateY(0) rotate(0deg);
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100vh) rotate(360deg);
-            }
-        }
-
-        .balloon-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-        }
-
-        .floating-balloon {
-            position: absolute;
-            font-size: 40px;
-            animation: floatUpBalloon 8s linear infinite;
-            opacity: 0;
-        }
-
-        @keyframes floatUpBalloon {
-            0% {
-                opacity: 0;
-                transform: translateY(0) scale(1);
-            }
-            10% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-120vh) scale(0.5) translateX(var(--drift));
-            }
-        }
-
-        .confetti-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9997;
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--color);
-            opacity: 0.8;
-            animation: fallConfetti 5s linear infinite;
-        }
-
-        @keyframes fallConfetti {
-            0% {
-                transform: translateY(-100%) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        .love-letter {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 100px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-        }
-
-        .letter-container {
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 60px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            color: #333;
-            position: relative;
-            transform: rotateX(5deg);
-            text-align: center;
-        }
-
-        .letter-container::before {
-            content: '💌';
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4em;
-        }
-
-        .letter-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3em;
-            margin-bottom: 30px;
-            color: #764ba2;
-        }
-
-        .letter-text {
-            font-size: 1.2em;
-            line-height: 2;
-            color: #555;
-        }
-
-        .gallery {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            padding: 100px 20px;
-            transform-style: preserve-3d;
-        }
-
-        .gallery-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 4em;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #d35400;
-        }
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            perspective: 1000px;
-        }
-
-        .photo-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-            cursor: pointer;
-            transform-style: preserve-3d;
-        }
-
-        .photo-card:hover {
-            transform: translateY(-10px) rotateY(10deg);
-        }
-
-        .photo-placeholder {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3em;
-        }
-
-        .photo-caption {
-            padding: 20px;
-            text-align: center;
-            color: #333;
-            font-size: 1.1em;
-        }
-
-        .memories-section {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ffd3a5 0%, #fd6585 100%);
-            padding: 100px 20px;
-            transform-style: preserve-3d;
-        }
-
-        .memories-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 4em;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #ff4081;
-        }
-
-        .memories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            perspective: 1000px;
-        }
-
-        .memory-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-            cursor: pointer;
-            transform-style: preserve-3d;
-        }
-
-        .memory-card:hover {
-            transform: translateZ(20px) rotateY(5deg);
-        }
-
-        .memory-placeholder {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3em;
-        }
-
-        .memory-caption {
-            padding: 20px;
-            text-align: center;
-            color: #333;
-            font-size: 1.1em;
-        }
-
-        .timeline-section {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            padding: 100px 20px;
-            transform-style: preserve-3d;
-        }
-
-        .timeline-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 4em;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #2c3e50;
-        }
-
-        .timeline {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, #667eea, #764ba2);
-        }
-
-        .timeline-item {
-            margin-bottom: 80px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-right: 60px;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 60px;
-            text-align: left;
-        }
-
-        .timeline-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 45%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            color: #333;
-            position: relative;
-            transform: rotateY(5deg);
-            opacity: 0;
-            animation: fadeInScale 1s forwards;
-            animation-delay: calc(0.2s * var(--index));
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            background: #764ba2;
-            border-radius: 50%;
-            border: 4px solid white;
-            top: 50%;
-            box-shadow: 0 0 20px rgba(118, 75, 162, 0.6);
-        }
-
-        .timeline-date {
-            font-weight: 600;
-            color: #764ba2;
-            margin-bottom: 10px;
-        }
-
-        .wishes {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            padding: 100px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-        }
-
-        .wishes-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 4em;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #fff;
-        }
-
-        .wish-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            width: 100%;
-            perspective: 1000px;
-        }
-
-        .wish-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            color: #333;
-            transition: transform 0.3s;
-            transform-style: preserve-3d;
-            opacity: 0;
-            animation: fadeInUp 0.5s forwards;
-            animation-delay: calc(0.1s * var(--index));
-        }
-
-        .wish-card:hover {
-            transform: scale(1.05) rotateY(-10deg);
-        }
-
-        .wish-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        .wish-title {
-            font-size: 1.5em;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #764ba2;
-        }
-
-        .surprise-section {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            transform-style: preserve-3d;
-        }
-
-        .gift-box {
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(45deg, #f093fb, #f5576c);
-            border-radius: 20px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.5s;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transform: rotateX(10deg);
-            animation: pulse 2s infinite;
-        }
-
-        .gift-box:hover {
-            transform: scale(1.1) rotateX(0) rotateY(5deg);
-        }
-
-        .gift-bow {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4em;
-        }
-
-        .gift-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.5em;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .surprise-message {
-            margin-top: 60px;
-            max-width: 600px;
-            text-align: center;
-            font-size: 1.5em;
-            opacity: 0;
-            transition: opacity 1s;
-        }
-
-        .surprise-message.show {
-            opacity: 1;
-        }
-
-        .countdown {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin-top: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .countdown-title {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .music-control {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #f093fb, #f5576c);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.5);
-            z-index: 1000;
-            transition: transform 0.3s;
-            animation: pulse 2s infinite;
-        }
-
-        .music-control:hover {
-            transform: scale(1.1);
-        }
-
-        .music-icon {
-            font-size: 1.5em;
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-            box-shadow: 0 0 5px white;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
-        }
-
-        .sparkle {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            animation: sparkleAnim 1s ease-out forwards;
-        }
-
-        @keyframes sparkleAnim {
-            0% {
-                opacity: 1;
-                transform: scale(0) rotate(0deg);
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1.5) rotate(180deg);
-            }
-        }
-
-        .fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9996;
-        }
-
-        .firework {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            animation: fireworkAnim 1.5s ease-out forwards;
-            box-shadow: 0 0 10px var(--color);
-        }
-
-        @keyframes fireworkAnim {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--x), var(--y)) scale(0.5);
-            }
-        }
-
-        .party-popper {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9995;
-            font-size: 50px;
-            animation: popperAnim 2s ease-out forwards;
-        }
-
-        @keyframes popperAnim {
-            0% {
-                opacity: 1;
-                transform: scale(0) rotate(0deg);
-            }
-            20% {
-                transform: scale(1.5) rotate(360deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-50px) scale(1);
-            }
-        }
-
-        .video-message {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            padding: 100px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-        }
-
-        .video-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 4em;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #c2185b;
-        }
-
-        .video-container {
-            max-width: 800px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            overflow: hidden;
-            transform: rotateY(5deg);
-        }
-
-        #easterEgg {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotateX(10deg);
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            color: #333;
-            text-align: center;
-            display: none;
-            z-index: 10001;
-        }
-
-        #easterEgg h3 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.5em;
-            color: #764ba2;
-            margin-bottom: 20px;
-        }
-
-        #easterEgg p {
-            font-size: 1.2em;
-            line-height: 1.8;
-        }
-
-        #closeEaster {
-            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            font-size: 1em;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .navigation {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-btn {
-            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .nav-btn:hover {
-            transform: scale(1.1);
-        }
-
-        @media (max-width: 768px) {
-    .restricted-title { font-size: 2.5em; } /* Changed from 3em */
-    .restricted-note { font-size: 1.2em; }
-    .hero-title { font-size: 3em; }
-    .gallery-title, .timeline-title, .wishes-title, .video-title { font-size: 2.5em; }
-    .timeline::before { display: none; }
-    .timeline-content {
-        width: 100%;
-        margin: 0 !important;
-        text-align: center !important;
-        padding: 20px !important;
-    }
-    .timeline-dot { left: 50%; top: 0; transform: translate(-50%, -100%); }
-    .navigation { flex-direction: column; gap: 10px; bottom: 80px; width: 90%; left: 5%; transform: none; }
-    .photo-grid, .memories-grid, .wish-cards { grid-template-columns: 1fr; }
-    .birthday-countdown { padding: 20px; }
-    .countdown-value { font-size: 2em; }
-    .calendar { max-width: 100%; }
-}
-    </style>
-</head>
-<body>
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-HappyBirthday.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <div class="heart-container" id="heartContainer"></div>
-    <div class="balloon-container" id="balloonContainer"></div>
-    <div class="confetti-container" id="confettiContainer"></div>
-    <div class="stars" id="starsContainer"></div>
-    <div class="fireworks" id="fireworksContainer"></div>
-    <div class="music-control" id="musicControl">
-        <span class="music-icon">🎵</span>
-    </div>
-
-    <div class="restricted-screen" id="restrictedScreen">
-        <h1 class="restricted-title">Eman's Birthday Surprise</h1>
-        <p class="restricted-note">
-            My dearest Eman, just a little wait until your special day! Something magical awaits you on October 7th, 2025. Get ready to explore a world of love and surprises crafted just for you! 💕
-        </p>
-        <div class="birthday-countdown" id="birthdayCountdown">
-            <div class="birthday-countdown-title">Countdown to Your Special Day! 🎂</div>
-            <div class="countdown-timer" id="birthdayTimer"></div>
-        </div>
-        <div class="calendar" id="calendar"></div>
-    </div>
-
-    <div class="main-container" id="mainContainer">
-        <section class="hero" id="heroSection">
-            <h1 class="hero-title">Happy Birthday<br>Eman 💖</h1>
-            <p class="hero-date">October 7th, 2025</p>
-            <div class="scroll-indicator">↓</div>
-        </section>
-
-        <section class="love-letter" id="letterSection">
-            <div class="letter-container">
-                <h2 class="letter-title">To My Beautiful Eman</h2>
-                <p class="letter-text">
-                    Every moment with you feels like a dream I never want to wake up from. Your smile lights up my darkest days, and your laugh is the sweetest melody I've ever heard. Today, we celebrate not just your birthday, but the incredible person you are and the joy you bring into my life. Here's to you, to us, and to all the beautiful memories we'll create together. Happy Birthday, my love! 💕
-                </p>
-            </div>
-        </section>
-
-        <section class="gallery" id="gallerySection">
-            <h2 class="gallery-title">Our Beautiful Moments</h2>
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <div class="photo-placeholder">📸</div>
-                    <div class="photo-caption">First Meeting - A moment I'll never forget</div>
-                </div>
-                <div class="photo-card">
-                    <div class="photo-placeholder">💑</div>
-                    <div class="photo-caption">Our First Date - When I knew you were special</div>
-                </div>
-                <div class="photo-card">
-                    <div class="photo-placeholder">🌟</div>
-                    <div class="photo-caption">Special Moments - Every second counts</div>
-                </div>
-                <div class="photo-card">
-                    <div class="photo-placeholder">❤️</div>
-                    <div class="photo-caption">Together Forever - Our journey continues</div>
-                </div>
-                <div class="photo-card">
-                    <div class="photo-placeholder">🌹</div>
-                    <div class="photo-caption">Romantic Dinners - Just you and me</div>
-                </div>
-                <div class="photo-card">
-                    <div class="photo-placeholder">🏖️</div>
-                    <div class="photo-caption">Beach Adventures - Making memories</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="memories-section" id="memoriesSection">
-            <h2 class="memories-title">Our Cherished Memories 💖</h2>
-            <div class="memories-grid">
-                <div class="memory-card">
-                    <div class="memory-placeholder">🖼️</div>
-                    <div class="memory-caption">Memory 1 - Add your photo and caption here</div>
-                </div>
-                <div class="memory-card">
-                    <div class="memory-placeholder">🖼️</div>
-                    <div class="memory-caption">Memory 2 - Add your photo and caption here</div>
-                </div>
-                <div class="memory-card">
-                    <div class="memory-placeholder">🖼️</div>
-                    <div class="memory-caption">Memory 3 - Add your photo and caption here</div>
-                </div>
-                <div class="memory-card">
-                    <div class="memory-placeholder">🖼️</div>
-                    <div class="memory-caption">Memory 4 - Add your photo and caption here</div>
-                </div>
-                <div class="memory-card">
-                    <div class="memory-placeholder">🖼️</div>
-                    <div class="memory-caption">Memory 5 - Add your photo and caption here</div>
-                </div>
-                <div class="memory-card">
-                    <div class="memory-placeholder">🖼️</div>
-                    <div class="memory-caption">Memory 6 - Add your photo and caption here</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="timeline-section" id="timelineSection">
-            <h2 class="timeline-title">Our Story Together</h2>
-            <div class="timeline">
-                <div class="timeline-item" style="--index: 1;">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">The Beginning</div>
-                        <h3>When Our Eyes First Met</h3>
-                        <p>The day everything changed. I knew from that moment you were someone extraordinary.</p>
-                    </div>
-                </div>
-                <div class="timeline-item" style="--index: 2;">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">First Date</div>
-                        <h3>A Night to Remember</h3>
-                        <p>Talking for hours felt like minutes. I couldn't stop smiling, and I still can't.</p>
-                    </div>
-                </div>
-                <div class="timeline-item" style="--index: 3;">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Growing Together</div>
-                        <h3>Every Day Gets Better</h3>
-                        <p>Building memories, sharing dreams, and falling more in love with you each day.</p>
-                    </div>
-                </div>
-                <div class="timeline-item" style="--index: 4;">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Today & Forever</div>
-                        <h3>Your Special Day</h3>
-                        <p>Celebrating you and looking forward to countless more birthdays together.</p>
-                    </div>
-                </div>
-                <div class="timeline-item" style="--index: 5;">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Our Future</div>
-                        <h3>Endless Adventures</h3>
-                        <p>Looking ahead to all the wonderful things we'll do together.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="wishes" id="wishesSection">
-            <h2 class="wishes-title">My Wishes For You</h2>
-            <div class="wish-cards">
-                <div class="wish-card" style="--index: 1;">
-                    <div class="wish-icon">🌟</div>
-                    <h3 class="wish-title">Dreams Come True</h3>
-                    <p>May all your dreams and aspirations become reality. I'll be here supporting you every step of the way.</p>
-                </div>
-                <div class="wish-card" style="--index: 2;">
-                    <div class="wish-icon">💖</div>
-                    <h3 class="wish-title">Endless Love</h3>
-                    <p>My love for you grows stronger each day. Here's to a lifetime of happiness together.</p>
-                </div>
-                <div class="wish-card" style="--index: 3;">
-                    <div class="wish-icon">🎉</div>
-                    <h3 class="wish-title">Joy & Laughter</h3>
-                    <p>May your days be filled with smiles, laughter, and countless moments of pure joy.</p>
-                </div>
-                <div class="wish-card" style="--index: 4;">
-                    <div class="wish-icon">🌈</div>
-                    <h3 class="wish-title">Beautiful Adventures</h3>
-                    <p>Let's explore the world together, creating memories that will last forever.</p>
-                </div>
-                <div class="wish-card" style="--index: 5;">
-                    <div class="wish-icon">💕</div>
-                    <h3 class="wish-title">Eternal Happiness</h3>
-                    <p>Wishing you a life filled with love, peace, and endless joy by my side.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="video-message" id="videoSection">
-            <h2 class="video-title">A Special Message For You 💌</h2>
-            <div class="video-container">
-                <iframe width="100%" height="450" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Special Message" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <p style="margin-top: 30px; font-size: 1.2em; max-width: 600px; text-align: center;">This video is a little surprise to show how much you mean to me. Watch it and feel my love! ❤️</p>
-        </section>
-
-        <section class="surprise-section" id="surpriseSection">
-            <h2 style="margin-bottom: 40px; font-size: 3em;">One More Thing...</h2>
-            <div class="gift-box" id="giftBox">
-                <div class="gift-bow">🎀</div>
-                <div class="gift-text">Click to Open!</div>
-            </div>
-            <div class="surprise-message" id="surpriseMessage">
-                <h3 style="font-size: 2em; margin-bottom: 20px;">My Promise to You 💍</h3>
-                <p>I promise to love you more each day, to support your dreams, to make you laugh when you're sad, and to be your partner in all of life's adventures. You make my world complete, Eman. Happy Birthday, my everything! 💕</p>
-            </div>
-            <div class="countdown">
-                <div class="countdown-title">Time We've Been Together ✨</div>
-                <div class="countdown-timer" id="countdownTimer"></div>
-            </div>
-        </section>
-    </div>
-
-    <div class="navigation" id="navigation">
-        <button class="nav-btn" onclick="scrollToSection('heroSection')">Home</button>
-        <button class="nav-btn" onclick="scrollToSection('letterSection')">Love Letter</button>
-        <button class="nav-btn" onclick="scrollToSection('gallerySection')">Gallery</button>
-        <button class="nav-btn" onclick="scrollToSection('memoriesSection')">Memories</button>
-        <button class="nav-btn" onclick="scrollToSection('timelineSection')">Timeline</button>
-        <button class="nav-btn" onclick="scrollToSection('wishesSection')">Wishes</button>
-        <button class="nav-btn" onclick="scrollToSection('videoSection')">Video</button>
-        <button class="nav-btn" onclick="scrollToSection('surpriseSection')">Surprise</button>
-    </div>
-
-    <div id="easterEgg">
-        <h3>Hidden Surprise! 🌹</h3>
-        <p>Roses are red,<br>Violets are blue,<br>My love for you is endless and true.<br>Will you be mine forever? 💖</p>
-        <button id="closeEaster">Close</button>
-    </div>
-
-    <script>
-        const loveMessages = [
-            "You're my everything 💕",
-            "I love your smile ☺️",
-            "You make me complete 💖",
-            "Forever yours 💑",
-            "My heart beats for you 💓",
-            "You're so beautiful 🌹",
-            "Thinking of you always 💭",
-            "You're my sunshine ☀️",
-            "I'm so lucky to have you 🍀",
-            "You're absolutely amazing ✨",
-            "Can't wait to see you 😘",
-            "You light up my life ✨",
-            "Our love is eternal 💞",
-            "Every day with you is a gift 🎁",
-            "You inspire me daily 🌟"
-        ];
-
-        const balloonEmojis = ['🎈', '🎈', '🎈', '🎈'];
-        const confettiColors = ['#ff69b4', '#ff1493', '#db7093', '#ffc0cb', '#ffb6c1'];
-
-        function createStars() {
-            const container = document.getElementById('starsContainer');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                container.appendChild(star);
-            }
-        }
-
-        let lastSparkle = 0;
-        document.addEventListener('mousemove', function(e) {
-            const now = Date.now();
-            if (now - lastSparkle > 100) {
-                createSparkle(e.clientX, e.clientY);
-                lastSparkle = now;
-            }
-        });
-
-        function createSparkle(x, y) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.innerHTML = '✨';
-            sparkle.style.left = x + 'px';
-            sparkle.style.top = y + 'px';
-            sparkle.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 1000);
-        }
-
-        function createFirework(x, y) {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f093fb', '#f5576c', '#ffd93d'];
-            const container = document.getElementById('fireworksContainer');
-            
-            for (let i = 0; i < 30; i++) {
-                const firework = document.createElement('div');
-                firework.className = 'firework';
-                firework.style.left = x + 'px';
-                firework.style.top = y + 'px';
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                firework.style.background = color;
-                firework.style.setProperty('--color', color);
-                
-                const angle = (Math.PI * 2 * i) / 30;
-                const velocity = 50 + Math.random() * 50;
-                firework.style.setProperty('--x', Math.cos(angle) * velocity + 'px');
-                firework.style.setProperty('--y', Math.sin(angle) * velocity + 'px');
-                
-                container.appendChild(firework);
-                setTimeout(() => firework.remove(), 1500);
-            }
-        }
-
-        function createPartyPopper(x, y) {
-            const popper = document.createElement('div');
-            popper.className = 'party-popper';
-            popper.innerHTML = '🎉';
-            popper.style.left = x + 'px';
-            popper.style.top = y + 'px';
-            document.body.appendChild(popper);
-            setTimeout(() => popper.remove(), 2000);
-        }
-
-        document.addEventListener('click', (e) => {
-            createPartyPopper(e.clientX, e.clientY);
-            createFirework(e.clientX, e.clientY);
-        });
-
-        const restrictedScreen = document.getElementById('restrictedScreen');
-        const mainContainer = document.getElementById('mainContainer');
-
-        function checkBirthday() {
-            const now = new Date();
-            const birthday = new Date(2025, 9, 7); // October 7, 2025
-            if (now < birthday) {
-                restrictedScreen.style.display = 'flex';
-                mainContainer.style.display = 'none';
-                updateBirthdayCountdown();
-                setInterval(updateBirthdayCountdown, 1000);
-                generateCalendar();
-            } else {
-                restrictedScreen.classList.add('fade-out');
-                setTimeout(() => {
-                    restrictedScreen.style.display = 'none';
-                    mainContainer.classList.add('active');
-                }, 1000);
-            }
-        }
-
-        const musicControl = document.getElementById('musicControl');
-        const musicIcon = document.querySelector('.music-icon');
-        const bgMusic = document.getElementById('bgMusic');
-        let isPlaying = false;
-        let musicClickCount = 0;
-
-        musicControl.addEventListener('click', () => {
-            if (!isPlaying) {
-                bgMusic.play();
-                musicIcon.textContent = '🔊';
-                isPlaying = true;
-            } else {
-                bgMusic.pause();
-                musicIcon.textContent = '🔇';
-                isPlaying = false;
-            }
-
-            musicClickCount++;
-            if (musicClickCount === 3) {
-                document.getElementById('easterEgg').style.display = 'block';
-                musicClickCount = 0;
-            }
-        });
-
-        document.getElementById('closeEaster').addEventListener('click', () => {
-            document.getElementById('easterEgg').style.display = 'none';
-        });
-
-        function createFloatingHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
-            heart.style.fontSize = Math.random() * 20 + 20 + 'px';
-            document.getElementById('heartContainer').appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
-        }
-
-        function createFloatingBalloon() {
-            const balloon = document.createElement('div');
-            balloon.className = 'floating-balloon';
-            balloon.innerHTML = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
-            balloon.style.left = Math.random() * 100 + 'vw';
-            balloon.style.animationDuration = Math.random() * 5 + 5 + 's';
-            balloon.style.fontSize = Math.random() * 30 + 30 + 'px';
-            balloon.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
-            document.getElementById('balloonContainer').appendChild(balloon);
-            setTimeout(() => balloon.remove(), 8000);
-        }
-
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.animationDuration = Math.random() * 3 + 3 + 's';
-            confetti.style.animationDelay = Math.random() * 2 + 's';
-            const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-            confetti.style.setProperty('--color', color);
-            document.getElementById('confettiContainer').appendChild(confetti);
-            setTimeout(() => confetti.remove(), 5000);
-        }
-
-        const giftBox = document.getElementById('giftBox');
-        const surpriseMessage = document.getElementById('surpriseMessage');
-
-        giftBox.addEventListener('click', (e) => {
-            giftBox.style.display = 'none';
-            surpriseMessage.classList.add('show');
-            createFirework(e.clientX, e.clientY);
-            setTimeout(() => createFirework(e.clientX + 100, e.clientY - 100), 200);
-            setTimeout(() => createFirework(e.clientX - 100, e.clientY + 100), 400);
-            setTimeout(() => createFirework(e.clientX + 50, e.clientY + 50), 600);
-        });
-
-        function updateTogetherCountdown() {
-            const startDate = new Date(2024, 0, 1); // Adjust to actual start date
-            const now = new Date();
-            const difference = now - startDate;
-
-            const years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365));
-            const months = Math.floor((difference % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
-            const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-            const timer = document.getElementById('countdownTimer');
-            timer.innerHTML = `
-                <div class="countdown-item">
-                    <span class="countdown-value">${years}</span>
-                    <span class="countdown-label">Years</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value">${months}</span>
-                    <span class="countdown-label">Months</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value">${days}</span>
-                    <span class="countdown-label">Days</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value">${hours}</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-            `;
-        }
-
-        function updateBirthdayCountdown() {
-            const birthday = new Date(2025, 9, 7); // October 7, 2025
-            const now = new Date();
-            const difference = birthday - now;
-
-            if (difference <= 0) {
-                document.getElementById('birthdayTimer').innerHTML = `
-                    <div class="countdown-item">
-                        <span class="countdown-value">0</span>
-                        <span class="countdown-label">Happy Birthday!</span>
-                    </div>
-                `;
-                checkBirthday(); // Re-check to show main content
-                return;
-            }
-
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            const timer = document.getElementById('birthdayTimer');
-            timer.innerHTML = `
-                <div class="countdown-item">
-                    <span class="countdown-value">${days}</span>
-                    <span class="countdown-label">Days</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value">${hours}</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value">${minutes}</span>
-                    <span class="countdown-label">Minutes</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-value">${seconds}</span>
-                    <span class="countdown-label">Seconds</span>
-                </div>
-            `;
-        }
-
-        function generateCalendar() {
-            const calendar = document.getElementById('calendar');
-            const month = 9; // October (0-based)
-            const year = 2025;
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-            let html = '<div class="calendar-header"><span>October 2025</span></div>';
-            html += '<div class="calendar-body">';
-            const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            weekdays.forEach(day => {
-                html += `<div class="calendar-weekday">${day}</div>`;
-            });
-
-            for (let i = 0; i < firstDay; i++) {
-                html += '<div class="calendar-day"></div>';
-            }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const isBirthday = day === 7;
-                html += `<div class="calendar-day ${isBirthday ? 'birthday' : ''}">${day}</div>`;
-            }
-
-            html += '</div>';
-            calendar.innerHTML = html;
-        }
-
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            section.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        createStars();
-        setInterval(createFloatingHeart, 500);
-        setInterval(createFloatingBalloon, 1000);
-        setInterval(createConfetti, 200);
-        updateTogetherCountdown();
-        setInterval(updateTogetherCountdown, 60000);
-        checkBirthday();
-        window.addEventListener('load', () => {
-            bgMusic.play().catch(() => {});
-        });
-    </script>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1507,6 +6,83 @@
   <title>Happy Birthday Eman - Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
+    .heart-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      perspective: 1000px; /* Add perspective for 3D effect */
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 40px; /* Larger hearts */
+      animation: floatUp 5s ease-in-out infinite;
+      opacity: 0;
+      filter: drop-shadow(0 0 15px #ff00de) drop-shadow(0 0 25px #ff69b4); /* Enhanced glow */
+      transform-style: preserve-3d; /* Enable 3D transformations */
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotateY(0deg) rotateX(0deg) scale(1);
+      }
+      10% {
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-50vh) rotateY(180deg) rotateX(360deg) scale(1.2); /* 3D rotation and scaling */
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotateY(360deg) rotateX(720deg) scale(0.8);
+      }
+    }
+
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9997;
+      perspective: 1000px; /* Add perspective for 3D effect */
+    }
+
+    .confetti {
+      position: absolute;
+      width: var(--width, 12px); /* Dynamic width */
+      height: var(--height, 12px); /* Dynamic height */
+      background: var(--color);
+      opacity: 0.9;
+      animation: fallConfetti 4s ease-in-out infinite;
+      transform-style: preserve-3d; /* Enable 3D transformations */
+      border-radius: var(--border-radius, 0); /* Support for circles */
+      box-shadow: 0 0 10px var(--color), 0 0 20px var(--color); /* Glow effect */
+    }
+
+    @keyframes fallConfetti {
+      0% {
+        transform: translateY(-100%) translateX(0) rotateY(0deg) rotateX(0deg) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(50vh) translateX(calc(var(--drift) * 100px)) rotateY(360deg) rotateX(360deg) scale(1.3); /* Add drift and 3D rotation */
+      }
+      100% {
+        transform: translateY(100vh) translateX(calc(var(--drift) * 100px)) rotateY(720deg) rotateX(720deg) scale(0.7);
+        opacity: 0;
+      }
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -1542,11 +118,11 @@
       width: 100%;
       height: 100%;
       background-image: url('EZcollage.jpg'); /* Your image path here */
-      background-size: cover;
+      background-size: contain;
       background-position: center;
       filter: brightness(0.4) blur(3px);
       z-index: -1;
-      opacity: 0.7;
+      opacity: 1;
       transition: opacity 1s ease-in-out;
     }
 
@@ -1601,6 +177,7 @@
       box-shadow: 0 0 30px rgba(255, 0, 222, 0.4), 0 0 60px rgba(255, 0, 222, 0.2);
       margin-bottom: 40px;
       animation: pulse 2s infinite;
+      opacity: 0.6;
     }
 
     .birthday-countdown-title {
@@ -1638,6 +215,7 @@
       color: #333;
       max-width: 400px;
       width: 100%;
+      opacity: 0.7;
     }
 
     .calendar-header {
@@ -1712,7 +290,8 @@
 <body>
   <div class="restricted-screen">
     <div class="restricted-bg"></div>
-    
+    <div class="heart-container" id="heartContainer"></div>
+    <div class="confetti-container" id="confettiContainer"></div>
     <h1 class="restricted-title">Kuchuu Puchuu Birthday Surprise</h1>
     <h2 class="restricted-title">1 day left januu</h2>
     <p class="restricted-note">
@@ -1728,6 +307,58 @@
   </div>
 
   <script>
+    // Confetti and hearts animation for restricted screen
+    const confettiColors = ['#ff69b4', '#ff1493', '#db7093', '#ffc0cb', '#ffb6c1', '#ff00de', '#ff85a2'];
+
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.innerHTML = Math.random() > 0.5 ? '❤️' : '💖'; /* Alternate heart emojis */
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 2 + 3 + 's'; /* Faster animation */
+      heart.style.fontSize = Math.random() * 20 + 30 + 'px'; /* Larger range of sizes */
+      document.getElementById('heartContainer').appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = Math.random() * 2 + 3 + 's'; /* Faster animation */
+      confetti.style.animationDelay = Math.random() * 1 + 's';
+      const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      const isCircle = Math.random() > 0.5;
+      confetti.style.setProperty('--color', color);
+      confetti.style.setProperty('--width', isCircle ? '12px' : Math.random() * 10 + 8 + 'px');
+      confetti.style.setProperty('--height', isCircle ? '12px' : Math.random() * 20 + 10 + 'px');
+      confetti.style.setProperty('--border-radius', isCircle ? '50%' : '0');
+      confetti.style.setProperty('--drift', Math.random() * 2 - 1); /* Random horizontal drift */
+      document.getElementById('confettiContainer').appendChild(confetti);
+      setTimeout(() => confetti.remove(), 4000);
+    }
+
+    // Animation interval handles
+    let heartInterval = null;
+    let confettiInterval = null;
+
+    function startRestrictedAnimations() {
+      if (!heartInterval) heartInterval = setInterval(createFloatingHeart, 300);
+      if (!confettiInterval) confettiInterval = setInterval(createConfetti, 100);
+    }
+
+    function stopRestrictedAnimations() {
+      if (heartInterval) { clearInterval(heartInterval); heartInterval = null; }
+      if (confettiInterval) { clearInterval(confettiInterval); confettiInterval = null; }
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      const restricted = document.querySelector('.restricted-screen');
+      if (restricted && restricted.style.display !== 'none') {
+        startRestrictedAnimations();
+      }
+    });
+
     function updateBirthdayCountdown() {
       const birthday = new Date(2025, 9, 7); // October 7, 2025
       const now = new Date();
@@ -1740,6 +371,7 @@
             <span class="countdown-label">Happy Birthday!</span>
           </div>
         `;
+        stopRestrictedAnimations();
         window.location.href = 'birthday.html'; // Redirect to unrestricted page
         return;
       }
