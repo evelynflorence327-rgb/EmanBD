@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday Eman - Countdown</title>
+  <title>Happy Birthday Eman</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
     .heart-container {
@@ -171,13 +171,13 @@
     }
 
     .birthday-countdown {
-      background: linear-gradient(45deg, #667eea, #764ba2);
+      background: linear-gradient(45deg, #ff69b4, #ff00de); /* Cuter pink gradient */
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 0 30px rgba(255, 0, 222, 0.4), 0 0 60px rgba(255, 0, 222, 0.2);
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.4), 0 0 60px rgba(255, 0, 222, 0.2);
       margin-bottom: 40px;
       animation: pulse 2s infinite;
-      opacity: 0.6;
+      opacity: 0.8; /* Slightly more opaque */
     }
 
     .birthday-countdown-title {
@@ -215,7 +215,7 @@
       color: #333;
       max-width: 400px;
       width: 100%;
-      opacity: 0.7;
+      opacity: 0.8; /* Slightly more visible */
     }
 
     .calendar-header {
@@ -251,14 +251,41 @@
 
     .calendar-weekday {
       font-weight: bold;
-      color: #764ba2;
+      color: #ff69b4; /* Cuter pink */
+    }
+
+    .cute-messages {
+      background: linear-gradient(45deg, #ffb6c1, #ff69b4); /* Soft pink gradient */
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
+      margin-bottom: 20px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInUp 1s forwards 1s;
+    }
+
+    .cute-messages-title {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      color: #fff;
+      font-family: 'Great Vibes', cursive;
+    }
+
+    .cute-message {
+      font-size: 1.1em;
+      margin: 10px 0;
+      color: #fff;
+      font-style: italic;
     }
 
     .password-prompt {
-      background: linear-gradient(45deg, #667eea, #764ba2);
+      background: linear-gradient(45deg, #ff69b4, #ff00de); /* Matching pink gradient */
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 0 30px rgba(255, 0, 222, 0.4), 0 0 60px rgba(255, 0, 222, 0.2);
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.4), 0 0 60px rgba(255, 0, 222, 0.2);
       margin-bottom: 40px;
       animation: pulse 2s infinite;
       max-width: 400px;
@@ -293,7 +320,7 @@
       padding: 10px 20px;
       border: none;
       border-radius: 10px;
-      background: #ff0000;
+      background: #ff1493; /* Hot pink */
       color: white;
       font-size: 1em;
       cursor: pointer;
@@ -301,7 +328,7 @@
     }
 
     .password-prompt button:hover {
-      background: #e000cc;
+      background: #ff00de;
     }
 
     @keyframes pulse {
@@ -342,25 +369,33 @@
     <div class="restricted-bg"></div>
     <div class="heart-container" id="heartContainer"></div>
     <div class="confetti-container" id="confettiContainer"></div>
-    <h1 class="restricted-title">Kuchuu Puchuu Birthday Surprise</h1>
-    <h2 class="restricted-title" id="subtitle">Few Hours left januu</h2>
+    <h1 class="restricted-title">Kuchuu Puchuu Birthday Surprise! 💖</h1>
+    <h2 class="restricted-title" id="subtitle">Just 4-5 hours left, my cutie pie! 😘</h2>
     <p class="restricted-note">
-      My Beboo, just few hours more in your special day!,Iloveyouuusoomuchh! 💕
+      My darling Beboo, the clock is ticking so fast to your super special day! I love you more than all the stars in the sky, januu! 🌟💕 Can't wait to shower you with hugs and kisses!
     </p>
 
     <div class="birthday-countdown" id="birthdayCountdown">
-      <div class="birthday-countdown-title">Countdown to Your Special Day! 🎂</div>
+      <div class="birthday-countdown-title">Almost there, love! Your birthday magic is about to sparkle! ✨🎂</div>
       <div class="countdown-timer" id="birthdayTimer"></div>
     </div>
 
     <div class="calendar" id="calendar"></div>
 
+    <div class="cute-messages">
+      <div class="cute-messages-title">Whisper these cutie words to make my heart flutter! 🦋</div>
+      <div class="cute-message">"You're my forever sunshine!" ☀️</div>
+      <div class="cute-message">"I love you more than ice cream on a hot day!" 🍦</div>
+      <div class="cute-message">"Hugs and cuddles forever, my Beboo!" 🤗</div>
+      <div class="cute-message">"Can't wait to celebrate us!" 🎈</div>
+    </div>
+
     <div class="password-prompt" id="passwordPrompt">
-      <div class="password-title">Happy Birthday! 🎉</div>
-      <p class="password-note">Enter the password to unlock your surprise!</p>
-      <input type="password" id="passwordInput" placeholder="Enter password">
-      <button id="submitPassword">Unlock</button>
-      <p id="error" style="color: red; display: none;"></p>
+      <div class="password-title">Ready for your surprise, sweetheart? 🎉💕</div>
+      <p class="password-note">Type our secret magic words to unlock the fun! (Hint: Our special names together! 😉)</p>
+      <input type="password" id="passwordInput" placeholder="Whisper the secret...">
+      <button id="submitPassword">Unlock the Magic! ✨</button>
+      <p id="error" style="color: #ff1493; display: none;"></p>
     </div>
   </div>
 
@@ -418,12 +453,12 @@
     });
 
     function updateBirthdayCountdown() {
-      const birthday = new Date(2025, 9, 7); // October 7, 2025
+      const birthday = new Date(2025, 9, 7, 0, 0, 0); // Set to October 7, 2025 at 00:00:00
       const now = new Date();
       const difference = birthday - now;
 
       if (difference <= 0) {
-        document.getElementById('subtitle').textContent = 'Happy Birthday Januu!';
+        document.getElementById('subtitle').textContent = 'Happy Birthday, my love! Its time! 🎊';
         document.getElementById('birthdayCountdown').style.display = 'none';
         document.getElementById('calendar').style.display = 'none';
         stopRestrictedAnimations();
@@ -463,7 +498,7 @@
       const firstDay = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      let html = '<div class="calendar-header"><span>October 2025</span></div>';
+      let html = '<div class="calendar-header"><span>October 2025 💖</span></div>';
       html += '<div class="calendar-body">';
       const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       weekdays.forEach(day => {
@@ -485,7 +520,7 @@
 
     function isBirthday() {
       const now = new Date();
-      const birthday = new Date(2025, 9, 7); // October 7, 2025
+      const birthday = new Date(2025, 9, 7, 4, 0, 0); // Adjusted for demo
       return now >= birthday;
     }
 
@@ -497,10 +532,10 @@
         if (isBirthday()) {
           window.location.href = 'birthday.html';
         } else {
-          errorElem.textContent = 'A little more wait until your birthday!';
+          errorElem.textContent = 'Aww, just a teeny bit more wait, my love! Hold on tight! 😍';
         }
       } else {
-        errorElem.textContent = 'Wrong password! Try again.';
+        errorElem.textContent = 'Oopsie! That\'s not the magic phrase. Try our sweet secret again! 💕';
       }
     });
 
@@ -513,4 +548,3 @@
   </script>
 </body>
 </html>
-``` 
