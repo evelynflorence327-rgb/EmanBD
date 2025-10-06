@@ -117,7 +117,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('EZcollage.jpg'); /* Your image path here */
+      background-image: url('collagEZe.jpg'); /* Your image path here */
       background-size: contain;
       background-position: center;
       filter: brightness(0.4) blur(3px);
@@ -254,6 +254,56 @@
       color: #764ba2;
     }
 
+    .password-prompt {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 0, 222, 0.4), 0 0 60px rgba(255, 0, 222, 0.2);
+      margin-bottom: 40px;
+      animation: pulse 2s infinite;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .password-title {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: white;
+      font-family: 'Great Vibes', cursive;
+    }
+
+    .password-note {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .password-prompt input {
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .password-prompt button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ff0000;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .password-prompt button:hover {
+      background: #e000cc;
+    }
+
     @keyframes pulse {
       0%, 100% {
         transform: scale(1);
@@ -293,9 +343,9 @@
     <div class="heart-container" id="heartContainer"></div>
     <div class="confetti-container" id="confettiContainer"></div>
     <h1 class="restricted-title">Kuchuu Puchuu Birthday Surprise</h1>
-    <h2 class="restricted-title">1 day left januu</h2>
+    <h2 class="restricted-title" id="subtitle">Few Hours left januu</h2>
     <p class="restricted-note">
-      My Beboo, just a little wait until your special day! Something magical awaits you on October 7th, 2025. Get ready to explore a world of love and surprises crafted just for you! 💕
+      My Beboo, just few hours more in your special day!,Iloveyouuusoomuchh! 💕
     </p>
 
     <div class="birthday-countdown" id="birthdayCountdown">
@@ -304,6 +354,14 @@
     </div>
 
     <div class="calendar" id="calendar"></div>
+
+    <div class="password-prompt" id="passwordPrompt">
+      <div class="password-title">Happy Birthday! 🎉</div>
+      <p class="password-note">Enter the password to unlock your surprise!</p>
+      <input type="password" id="passwordInput" placeholder="Enter password">
+      <button id="submitPassword">Unlock</button>
+      <p id="error" style="color: red; display: none;"></p>
+    </div>
   </div>
 
   <script>
@@ -365,14 +423,10 @@
       const difference = birthday - now;
 
       if (difference <= 0) {
-        document.getElementById('birthdayTimer').innerHTML = `
-          <div class="countdown-item">
-            <span class="countdown-value">0</span>
-            <span class="countdown-label">Happy Birthday!</span>
-          </div>
-        `;
+        document.getElementById('subtitle').textContent = 'Happy Birthday Januu!';
+        document.getElementById('birthdayCountdown').style.display = 'none';
+        document.getElementById('calendar').style.display = 'none';
         stopRestrictedAnimations();
-        window.location.href = 'birthday.html'; // Redirect to unrestricted page
         return;
       }
 
@@ -429,9 +483,34 @@
       calendar.innerHTML = html;
     }
 
+    function isBirthday() {
+      const now = new Date();
+      const birthday = new Date(2025, 9, 7); // October 7, 2025
+      return now >= birthday;
+    }
+
+    document.getElementById('submitPassword').addEventListener('click', function() {
+      const password = document.getElementById('passwordInput').value;
+      const errorElem = document.getElementById('error');
+      errorElem.style.display = 'block';
+      if (password === 'emanzohaib') {
+        if (isBirthday()) {
+          window.location.href = 'birthday.html';
+        } else {
+          errorElem.textContent = 'A little more wait until your birthday!';
+        }
+      } else {
+        errorElem.textContent = 'Wrong password! Try again.';
+      }
+    });
+
+    // Show password prompt always, hide only after successful login
+    document.getElementById('passwordPrompt').style.display = 'block';
+
     updateBirthdayCountdown();
     setInterval(updateBirthdayCountdown, 1000);
     generateCalendar();
   </script>
 </body>
 </html>
+``` 

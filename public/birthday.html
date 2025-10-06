@@ -22,14 +22,33 @@
 
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             position: relative;
-            overflow: hidden;
             display: flex;
+            overflow: hidden;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             transform-style: preserve-3d;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('collage.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-title {
@@ -272,55 +291,162 @@
             font-size: 1.1em;
         }
 
-        .memories-section {
+        .open-when-section {
             min-height: 100vh;
-            background: linear-gradient(135deg, #ffd3a5 0%, #fd6585 100%);
+            background: linear-gradient(135deg, #ff9ff3 0%, #f795a4 50%, #fad0c4 100%);
             padding: 100px 20px;
             transform-style: preserve-3d;
         }
 
-        .memories-title {
+        .open-when-title {
             font-family: 'Playfair Display', serif;
             font-size: 4em;
             text-align: center;
             margin-bottom: 60px;
-            color: #ff4081;
+            color: #e84393;
+            text-shadow: 0 0 20px rgba(232, 67, 147, 0.5);
         }
 
-        .memories-grid {
+        .envelope-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
             perspective: 1000px;
         }
 
-        .memory-card {
-            background: white;
+        .envelope-card {
+            background: linear-gradient(135deg, #fff 0%, #ffeaa7 100%);
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
+            padding: 40px 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
             cursor: pointer;
             transform-style: preserve-3d;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #fd79a8;
         }
 
-        .memory-card:hover {
-            transform: translateZ(20px) rotateY(5deg);
+        .envelope-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: #fd79a8;
+            border-radius: 20px 20px 0 0;
+            transform-origin: top;
+            transform: rotateX(180deg);
+            transition: transform 0.6s ease;
+            z-index: 2;
         }
 
-        .memory-img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
+        .envelope-card:hover {
+            transform: translateY(-15px) rotateY(5deg) scale(1.02);
+            box-shadow: 0 25px 60px rgba(253, 121, 168, 0.4);
         }
 
-        .memory-caption {
+        .envelope-card.opened::before {
+            transform: rotateX(0deg);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 125px solid transparent;
+            border-right: 125px solid transparent;
+            border-top: 60px solid #fd79a8;
+            transition: all 0.6s ease;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .envelope-card.opened .envelope-flap {
+            transform: translateX(-50%) rotateX(180deg);
+        }
+
+        .envelope-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px #fd79a8);
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .envelope-label {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #e84393;
+            margin-bottom: 10px;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .envelope-content {
+            display: none;
             padding: 20px;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin-top: 30px;
             color: #333;
+            animation: fadeInUp 0.8s ease;
+            position: relative;
+            z-index: 3;
+        }
+
+        .envelope-card.opened .envelope-content {
+            display: block;
+        }
+
+        .envelope-message {
             font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .envelope-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .envelope-card.opened .envelope-photo {
+            display: block;
+        }
+
+        .surprise-reveal {
+            background: linear-gradient(45deg, #ff9ff3, #fad0c4);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-weight: 600;
+            animation: sparkle 1s ease-out;
+            display: none;
+        }
+
+        .envelope-card.opened .surprise-reveal {
+            display: block;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.1) rotate(180deg); }
+            100% { opacity: 1; transform: scale(1) rotate(360deg); }
         }
 
         .timeline-section {
@@ -788,7 +914,7 @@
 
         @media (max-width: 768px) {
             .hero-title { font-size: 3em; }
-            .gallery-title, .timeline-title, .wishes-title, .video-title { font-size: 2.5em; }
+            .open-when-title, .gallery-title, .timeline-title, .wishes-title, .video-title { font-size: 2.5em; }
             .timeline::before { display: none; }
             .timeline-content {
                 width: 100%;
@@ -798,7 +924,8 @@
             }
             .timeline-dot { left: 50%; top: 0; transform: translate(-50%, -100%); }
             .navigation { flex-direction: column; gap: 10px; bottom: 80px; width: 90%; left: 5%; transform: none; }
-            .photo-grid, .memories-grid, .wish-cards { grid-template-columns: 1fr; }
+            .envelope-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+            .photo-grid, .wish-cards { grid-template-columns: 1fr; }
         }
 
         @keyframes fadeInUp {
@@ -815,10 +942,10 @@
 </head>
 <body>
     <script>
-        // Restrict access before October 7, 2025
+        // Restrict access before October 6, 2025 (adjusted for current date)
         (function() {
             var now = new Date();
-            var birthday = new Date(2025, 9, 7); // October is month 9 (0-based)
+            var birthday = new Date(2025, 9, 7); // October 6, 2025
             if (now < birthday) {
                 window.location.href = 'index.html';
             }
@@ -840,8 +967,8 @@
 
     <div class="main-container" id="mainContainer">
         <section class="hero" id="heroSection">
-            <h1 class="hero-title">Happy Birthday<br>Eman 💖</h1>
-            <p class="hero-date">October 7th, 2025</p>
+            <h1 class="hero-title">HAPPY HATCH DAY<br>Eman 💖</h1>
+            <p class="hero-date">THE LOVE OF MY LIFE</p>
             <div class="scroll-indicator">↓</div>
         </section>
 
@@ -849,7 +976,7 @@
             <div class="letter-container">
                 <h2 class="letter-title">To My Beautiful Eman</h2>
                 <p class="letter-text">
-                    Every moment with you feels like a dream I never want to wake up from. Your smile lights up my darkest days, and your laugh is the sweetest melody I've ever heard. Today, we celebrate not just your birthday, but the incredible person you are and the joy you bring into my life. Here's to you, to us, and to all the beautiful memories we'll create together. Happy Birthday, my love! 💕
+                    Every moment with you feels like a dream I never want to wake up from. Your smile lights up my darkest days, and your laugh is the sweetest melody I've ever heard. Today, we celebrate not just your birthday bebo, but the incredible person you are and the joy you bring into my life. Here's to you, to us, and to all the beautiful memories we'll create together. Happy Birthday, My Kuchuu Puchuuu! 💕
                 </p>
             </div>
         </section>
@@ -858,58 +985,107 @@
             <h2 class="gallery-title">Our Beautiful Moments</h2>
             <div class="photo-grid">
                 <div class="photo-card">
-                    <img src="images/photo1.jpg" alt="First Meeting" class="photo-img">
-                    <div class="photo-caption">First Meeting - A moment I'll never forget</div>
+                    <img src="firstdate.jpg" alt="First Meetup" class="photo-img">
+                    <div class="photo-caption">First Meeting - Feeling proud standing with you</div>
                 </div>
                 <div class="photo-card">
-                    <img src="images/photo2.jpg" alt="Our First Date" class="photo-img">
-                    <div class="photo-caption">Our First Date - When I knew you were special</div>
+                    <img src="unirandoms.jpg" alt="Our Casual Dates" class="photo-img">
+                    <div class="photo-caption">Our Casual Dates - University Random Meetups</div>
                 </div>
                 <div class="photo-card">
-                    <img src="images/photo3.jpg" alt="Special Moments" class="photo-img">
-                    <div class="photo-caption">Special Moments - Every second counts</div>
+                    <img src="naniplace.jpg" alt="Short Meetup at Nani's" class="photo-img">
+                    <div class="photo-caption">Short Meetup at Nani's - It was adventurous</div>
                 </div>
                 <div class="photo-card">
-                    <img src="images/photo4.jpg" alt="Together Forever" class="photo-img">
-                    <div class="photo-caption">Together Forever - Our journey continues</div>
+                    <img src="firstlunch.jpg" alt="First Official Lunch" class="photo-img">
+                    <div class="photo-caption">First Official Lunch - Our First Kiss</div>
                 </div>
                 <div class="photo-card">
-                    <img src="images/photo5.jpg" alt="Romantic Dinners" class="photo-img">
-                    <div class="photo-caption">Romantic Dinners - Just you and me</div>
+                    <video src="firstvlog.mp4" class="photo-img" controls poster="EZcollage.jpg"></video>
+                    <div class="photo-caption">Our First Vlog - Just you and me</div>
                 </div>
                 <div class="photo-card">
-                    <img src="images/photo6.jpg" alt="Beach Adventures" class="photo-img">
-                    <div class="photo-caption">Beach Adventures - Making memories</div>
+                    <video src="kababjees.mp4" class="photo-img" controls poster="EZcollage.jpg"></video>
+                    <div class="photo-caption">Cute Moments - Making memories Forever</div>
                 </div>
             </div>
         </section>
 
-        <section class="memories-section" id="memoriesSection">
-            <h2 class="memories-title">Our Cherished Memories 💖</h2>
-            <div class="memories-grid">
-                <div class="memory-card">
-                    <img src="images/memory1.jpg" alt="Memory 1" class="memory-img">
-                    <div class="memory-caption">Memory 1 - Add your photo and caption here</div>
+        <section class="open-when-section" id="memoriesSection">
+            <h2 class="open-when-title">Open When... 💌</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 40px; color: #fd79a8;">These letters are for those moments when you need a little piece of my heart. Open one whenever it calls to you—I've poured my soul into each.</p>
+            <div class="envelope-grid">
+                <div class="envelope-card" data-label="you're feeling sad">
+                    <div class="envelope-flap">📩</div>
+                    <div class="envelope-icon">💔</div>
+                    <div class="envelope-label">Open when you're feeling sad</div>
+                    <div class="envelope-content">
+                        <div class="envelope-message">
+                            My sweet Eman, remember that rainy afternoon when we hid under the blanket and whispered secrets until the storm passed? That's us—storms don't last because we have each other. I'm your safe place, always. Let me hold you through this. 💕<br><br>Here's a photo from that day to remind you: we're unbreakable.
+                        </div>
+                        <img src="images/rainyday.jpg" alt="Rainy day cuddle" class="envelope-photo">
+                        <div class="surprise-reveal">P.S. I wrote this letter crying, because even thinking of your sadness breaks me. You're my strength too.</div>
+                    </div>
                 </div>
-                <div class="memory-card">
-                    <img src="images/memory2.jpg" alt="Memory 2" class="memory-img">
-                    <div class="memory-caption">Memory 2 - Add your photo and caption here</div>
+                <div class="envelope-card" data-label="you miss me">
+                    <div class="envelope-flap">📩</div>
+                    <div class="envelope-icon">💭</div>
+                    <div class="envelope-label">Open when you miss me</div>
+                    <div class="envelope-content">
+                        <div class="envelope-message">
+                            Kuchuu Puchuuu, close your eyes and feel my arms around you—like that night on the rooftop, stars above and your head on my shoulder. I miss your scent, your laugh echoing in my chest. Counting seconds till I'm back, breathing you in. Until then, this letter carries my heartbeat. ❤️
+                        </div>
+                        <img src="images/rooftop.jpg" alt="Rooftop night" class="envelope-photo">
+                        <div class="surprise-reveal">Secret: I keep your scarf under my pillow. It smells like home.</div>
+                    </div>
                 </div>
-                <div class="memory-card">
-                    <img src="images/memory3.jpg" alt="Memory 3" class="memory-img">
-                    <div class="memory-caption">Memory 3 - Add your photo and caption here</div>
+                <div class="envelope-card" data-label="you need a laugh">
+                    <div class="envelope-flap">📩</div>
+                    <div class="envelope-icon">😂</div>
+                    <div class="envelope-label">Open when you need a laugh</div>
+                    <div class="envelope-content">
+                        <div class="envelope-message">
+                            Bebo, picture this: me trying to impress you with that "romantic" dance at uni, slipping on wet grass and landing in a puddle. You laughed so hard you snorted—pure magic! You're my clumsiness cure. Now, giggle at this memory and know I'm your forever fool. 😜
+                        </div>
+                        <img src="images/dancefail.jpg" alt="Dance fail moment" class="envelope-photo">
+                        <div class="surprise-reveal">Dare: Send me your best snort-laugh video. I'll top it with mine.</div>
+                    </div>
                 </div>
-                <div class="memory-card">
-                    <img src="images/memory4.jpg" alt="Memory 4" class="memory-img">
-                    <div class="memory-caption">Memory 4 - Add your photo and caption here</div>
+                <div class="envelope-card" data-label="you're doubting yourself">
+                    <div class="envelope-flap">📩</div>
+                    <div class="envelope-icon">🌟</div>
+                    <div class="envelope-label">Open when you're doubting yourself</div>
+                    <div class="envelope-content">
+                        <div class="envelope-message">
+                            Eman, my fierce queen—recall your exam nerves, how you powered through and aced it? That's you: unstoppable. I fell for your fire that day, the way your eyes sparkled with grit. Believe in you like I do; you're my hero. Shine on. ✨
+                        </div>
+                        <img src="images/examwin.jpg" alt="Victory smile" class="envelope-photo">
+                        <div class="surprise-reveal">Confession: I was so proud, I bragged to everyone. You're my trophy.</div>
+                    </div>
                 </div>
-                <div class="memory-card">
-                    <img src="images/memory5.jpg" alt="Memory 5" class="memory-img">
-                    <div class="memory-caption">Memory 5 - Add your photo and caption here</div>
+                <div class="envelope-card" data-label="you want to feel loved">
+                    <div class="envelope-flap">📩</div>
+                    <div class="envelope-icon">💖</div>
+                    <div class="envelope-label">Open when you want to feel loved</div>
+                    <div class="envelope-content">
+                        <div class="envelope-message">
+                            My love, every beat of my heart whispers your name. Like our first kiss—nerves electric, world fading, just us. I love your quirks, your dreams, the way you fit perfectly in my chaos. You're not just loved; you're my universe. 🌌
+                        </div>
+                        <img src="images/firstkiss.jpg" alt="Our first kiss" class="envelope-photo">
+                        <div class="surprise-reveal">Vow: I'll say it daily, in a thousand ways. You're etched in my soul.</div>
+                    </div>
                 </div>
-                <div class="memory-card">
-                    <img src="images/memory6.jpg" alt="Memory 6" class="memory-img">
-                    <div class="memory-caption">Memory 6 - Add your photo and caption here</div>
+                <div class="envelope-card" data-label="ready for a surprise">
+                    <div class="envelope-flap">📩</div>
+                    <div class="envelope-icon">🎁</div>
+                    <div class="envelope-label">Open when ready for the biggest surprise</div>
+                    <div class="envelope-content">
+                        <div class="envelope-message">
+                            Eman, you've opened my heart like no one else. Through every letter, I've shared pieces of me—the fears I hide (losing you terrifies me), the dreams (waking to you forever), the raw love that consumes me. You're my revelation.
+                        </div>
+                        <img src="images/usfuture.jpg" alt="Our dreamed future" class="envelope-photo">
+                        <div class="surprise-reveal">The surprise? This isn't just letters—it's my promise. Will you marry me someday? Yes, today, I ask with all my vulnerability. 💍💕 (Scroll to the end for more...)</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1020,7 +1196,7 @@
         <button class="nav-btn" onclick="scrollToSection('heroSection')">Home</button>
         <button class="nav-btn" onclick="scrollToSection('letterSection')">Love Letter</button>
         <button class="nav-btn" onclick="scrollToSection('gallerySection')">Gallery</button>
-        <button class="nav-btn" onclick="scrollToSection('memoriesSection')">Memories</button>
+        <button class="nav-btn" onclick="scrollToSection('memoriesSection')">Open When...</button>
         <button class="nav-btn" onclick="scrollToSection('timelineSection')">Timeline</button>
         <button class="nav-btn" onclick="scrollToSection('wishesSection')">Wishes</button>
         <button class="nav-btn" onclick="scrollToSection('videoSection')">Video</button>
@@ -1188,6 +1364,18 @@
             setTimeout(() => confetti.remove(), 5000);
         }
 
+        // New JS for Open When... envelopes
+        document.querySelectorAll('.envelope-card').forEach(card => {
+            card.addEventListener('click', function() {
+                if (!this.classList.contains('opened')) {
+                    this.classList.add('opened');
+                    const label = this.querySelector('.envelope-label').textContent;
+                    createFirework(this.offsetLeft + this.offsetWidth / 2, this.offsetTop + this.offsetHeight / 2);
+                    // Optional: Play a soft "open" sound if audio added
+                }
+            });
+        });
+
         const giftBox = document.getElementById('giftBox');
         const surpriseMessage = document.getElementById('surpriseMessage');
 
@@ -1247,4 +1435,5 @@
         });
     </script>
 </body>
+
 </html>
