@@ -520,8 +520,9 @@
 
     function isBirthday() {
       const now = new Date();
-      const birthday = new Date(2025, 9, 7, 4, 0, 0); // Adjusted for demo
-      return now >= birthday;
+      // Treat the entire local day of Oct 7, 2025 as birthday so the page can be
+      // unlocked any time during that date (midnight through 23:59:59).
+      return now.getFullYear() === 2025 && now.getMonth() === 9 && now.getDate() === 7;
     }
 
     document.getElementById('submitPassword').addEventListener('click', function() {
