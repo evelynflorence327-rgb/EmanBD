@@ -1,6 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .promise-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20000;
+        }
+        .promise-modal-content {
+            background: #fff;
+            color: #d72660;
+            padding: 40px 30px 30px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            text-align: center;
+            max-width: 90vw;
+            max-height: 90vh;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        .promise-modal-content h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        .promise-modal-content label {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .promise-btn {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+            color: #fff;
+            border: none;
+            padding: 12px 40px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .promise-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Eman 💖</title>
@@ -21,7 +73,6 @@
         }
 
         .hero {
-            height: 100vh;
             position: relative;
             display: flex;
             overflow: hidden;
@@ -29,7 +80,14 @@
             justify-content: center;
             align-items: center;
             transform-style: preserve-3d;
+            background: none;
+            width: 100vw;
+            max-width: 100%;
+            aspect-ratio: 16/9;
+            height: auto;
         }
+        
+        
 
         .hero::before {
             content: '';
@@ -39,17 +97,21 @@
             width: 100%;
             height: 100%;
             background-image: url('collage.jpg');
-            background-size: cover;
-            background-position: center;
+            background-size: contain;
+            background-position: center center;
             background-repeat: no-repeat;
-            opacity: 0.7;
+            opacity: 1;
             z-index: 0;
+            pointer-events: none;
+            display: block;
         }
+        
 
         .hero > * {
             position: relative;
             z-index: 1;
         }
+        
 
         .hero-title {
             font-family: 'Playfair Display', serif;
@@ -196,49 +258,112 @@
         }
 
         .love-letter {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 200px 20px 100px 20px; /* Increased top padding to prevent cutoff */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            transform-style: preserve-3d;
-            overflow-y: auto;
-        }
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    padding: 200px 20px 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Changed to center for better vertical alignment */
+    transform-style: preserve-3d;
+    overflow-y: auto;
+}
 
-        .letter-container {
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 60px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            color: #333;
-            position: relative;
-            transform: rotateX(5deg);
-            text-align: center;
-        }
+.letter-container {
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 60px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    color: #333;
+    position: relative;
+    transform: rotateX(5deg);
+    text-align: center;
+    opacity: 0;
+    animation: fadeInScaleLetter 1.5s ease forwards 0.5s; /* Added animation */
+}
 
-        .letter-container::before {
-            content: '💌';
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 4em;
-        }
+@keyframes fadeInScaleLetter {
+    from {
+        opacity: 0;
+        transform: rotateX(15deg) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: rotateX(5deg) scale(1);
+    }
+}
 
-        .letter-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3em;
-            margin-bottom: 30px;
-            color: #764ba2;
-        }
+.letter-container::before {
+    content: '💌';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4em;
+}
 
-        .letter-text {
-            font-size: 1.2em;
-            line-height: 2;
-            color: #555;
+.letter-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: #764ba2;
+}
+
+.letter-text {
+    font-size: 1.2em;
+    line-height: 2;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        aspect-ratio: 1/1;
+        min-height: 220px;
+        height: auto;
+        max-height: 60vw;
+    }
+    .hero::before {
+        background-size: contain;
+        background-position: center center;
+        height: 100%;
+    }
+    .love-letter {
+        padding: 100px 10px 50px 10px; /* Reduced padding for mobile */
+        align-items: flex-start; /* Adjusted back to flex-start to avoid cutoff on short screens */
+    }
+
+    .letter-container {
+        max-width: 100%; /* Full width on mobile */
+        padding: 40px 20px; /* Reduced padding */
+        transform: rotateX(0deg); /* Remove 3D tilt on mobile for better readability */
+        animation: fadeInScaleLetterMobile 1s ease forwards; /* Simpler animation for mobile */
+    }
+
+    @keyframes fadeInScaleLetterMobile {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
         }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .letter-title {
+        font-size: 2em; /* Smaller title on mobile */
+    }
+
+    .letter-text {
+        font-size: 1em; /* Smaller text on mobile */
+        line-height: 1.8;
+    }
+
+    .letter-container::before {
+        top: -30px; /* Adjust emoji position */
+        font-size: 3em;
+    }
+}
 
         .gallery {
             min-height: 100vh;
@@ -303,8 +428,8 @@
             font-size: 4em;
             text-align: center;
             margin-bottom: 60px;
-            color: #e84393;
-            text-shadow: 0 0 20px rgba(232, 67, 147, 0.5);
+            color: #8b43e8;
+            text-shadow: 0 0 20px rgba(67, 97, 232, 0.5);
         }
 
         .envelope-grid {
@@ -602,16 +727,75 @@
         }
 
         .gift-box {
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(45deg, #f093fb, #f5576c);
-            border-radius: 20px;
+            width: 200px;
+            height: 200px;
+            background: #f5576c;
+            border-radius: 12px;
             position: relative;
             cursor: pointer;
-            transition: all 0.5s;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transform: rotateX(10deg);
-            animation: pulse 2s infinite;
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 6px 24px 0 rgba(245, 87, 108, 0.13);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .gift-box:hover {
+            box-shadow: 0 12px 32px 0 rgba(245, 87, 108, 0.18);
+            transform: scale(1.03);
+        }
+        .gift-lid {
+            position: absolute;
+            top: -36px;
+            left: 50%;
+            transform: translateX(-50%) rotate(0deg);
+            width: 180px;
+            height: 40px;
+            background: #fff;
+            border-radius: 10px 10px 6px 6px;
+            box-shadow: 0 2px 8px 0 rgba(245,87,108,0.08);
+            z-index: 2;
+            border-bottom: 2px solid #fd79a8;
+            transition: transform 0.7s cubic-bezier(.4,2,.3,1);
+        }
+        .gift-box.opened .gift-lid {
+            transform: translateX(-50%) rotate(-60deg);
+        }
+        .gift-ribbon {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 100%;
+            background: #fd79a8;
+            border-radius: 8px;
+            z-index: 3;
+        }
+        .gift-ribbon-horizontal {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: #fd79a8;
+            border-radius: 5px;
+            z-index: 3;
+            transform: translateY(-50%);
+        }
+        .gift-bow {
+            display: none;
+        }
+        .gift-text {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.1em;
+            font-weight: 600;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 2px 8px #f5576c, 0 0 2px #fff;
         }
 
         @keyframes pulse {
@@ -634,6 +818,16 @@
             transform: translateX(-50%);
             font-size: 4em;
         }
+        
+        .gift-bow {
+            position: absolute;
+            top: -38px;
+            left: 50%;
+            transform: translateX(-50%) scale(1.1) rotate(-8deg);
+            font-size: 3.5em;
+            z-index: 4;
+            filter: drop-shadow(0 2px 8px #fd79a8);
+        }
 
         .gift-text {
             position: absolute;
@@ -643,6 +837,19 @@
             font-size: 1.5em;
             font-weight: 600;
             text-align: center;
+        }
+        
+        .gift-text {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.3em;
+            font-weight: 600;
+            text-align: center center;
+            color: #fff;
+            text-shadow: 0 2px 8px #f5576c, 0 0 2px #fff;
+            z-index: 1000;
         }
 
         .surprise-message {
@@ -882,7 +1089,7 @@
             cursor: pointer;
             margin-top: 20px;
         }
-
+/* 
         .navigation {
             position: fixed;
             bottom: 100px;
@@ -895,7 +1102,7 @@
             padding: 10px 20px;
             border-radius: 50px;
             backdrop-filter: blur(10px);
-        }
+        } */
 
         .nav-btn {
             background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
@@ -923,7 +1130,7 @@
                 padding: 20px !important;
             }
             .timeline-dot { left: 50%; top: 0; transform: translate(-50%, -100%); }
-            .navigation { flex-direction: column; gap: 10px; bottom: 80px; width: 90%; left: 5%; transform: none; }
+            /* .navigation { flex-direction: column; gap: 10px; bottom: 80px; width: 90%; left: 5%; transform: none; } */
             .envelope-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
             .photo-grid, .wish-cards { grid-template-columns: 1fr; }
         }
@@ -941,11 +1148,35 @@
     </style>
 </head>
 <body>
+    <div class="promise-modal" id="promiseModal">
+        <div class="promise-modal-content">
+            <h2>Promise Me!</h2>
+            <label>
+                <input type="checkbox" id="promiseCheckbox" style="transform: scale(1.5); margin-right: 10px;" />
+                I promise I will never leave you, no matter what! 💖
+            </label>
+            <button class="promise-btn" id="promiseBtn" disabled>I Promise!</button>
+        </div>
+    </div>
+    <div id="loveBannerContainer"></div>
     <script>
+        // Promise modal logic
+        const promiseModal = document.getElementById('promiseModal');
+        const promiseCheckbox = document.getElementById('promiseCheckbox');
+        const promiseBtn = document.getElementById('promiseBtn');
+        document.body.style.overflow = 'hidden';
+
+        promiseCheckbox.addEventListener('change', function() {
+            promiseBtn.disabled = !this.checked;
+        });
+        promiseBtn.addEventListener('click', function() {
+            promiseModal.style.display = 'none';
+            document.body.style.overflow = '';
+        });
         // Restrict access before October 6, 2025 (adjusted for current date)
         (function() {
             var now = new Date();
-            var birthday = new Date(2025, 9, 7); // October 6, 2025
+            var birthday = new Date(2025, 9, 5); // October 6, 2025
             if (now < birthday) {
                 window.location.href = 'index.html';
             }
@@ -1013,7 +1244,7 @@
 
         <section class="open-when-section" id="memoriesSection">
             <h2 class="open-when-title">Open When... 💌</h2>
-            <p style="text-align: center; font-size: 1.2em; margin-bottom: 40px; color: #fd79a8;">These letters are for those moments when you need a little piece of my heart. Open one whenever it calls to you—I've poured my soul into each.</p>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 40px; color: #030303;">These letters are for those moments when you need a little piece of my heart. Open one whenever it calls to you—I've poured my soul into each.</p>
             <div class="envelope-grid">
                 <div class="envelope-card" data-label="you're feeling sad">
                     <div class="envelope-flap">📩</div>
@@ -1035,8 +1266,7 @@
                         <div class="envelope-message">
                             Kuchuu Puchuuu, close your eyes and feel my arms around you—like that night on the rooftop, stars above and your head on my shoulder. I miss your scent, your laugh echoing in my chest. Counting seconds till I'm back, breathing you in. Until then, this letter carries my heartbeat. ❤️
                         </div>
-                        <img src="images/rooftop.jpg" alt="Rooftop night" class="envelope-photo">
-                        <div class="surprise-reveal">Secret: I keep your scarf under my pillow. It smells like home.</div>
+                        <div class="surprise-reveal">Secret: Whenever I miss you, I hold onto something that reminds me of you and it always brings me comfort.</div>
                     </div>
                 </div>
                 <div class="envelope-card" data-label="you need a laugh">
@@ -1059,7 +1289,6 @@
                         <div class="envelope-message">
                             Eman, my fierce queen—recall your exam nerves, how you powered through and aced it? That's you: unstoppable. I fell for your fire that day, the way your eyes sparkled with grit. Believe in you like I do; you're my hero. Shine on. ✨
                         </div>
-                        <img src="images/examwin.jpg" alt="Victory smile" class="envelope-photo">
                         <div class="surprise-reveal">Confession: I was so proud, I bragged to everyone. You're my trophy.</div>
                     </div>
                 </div>
@@ -1071,7 +1300,7 @@
                         <div class="envelope-message">
                             My love, every beat of my heart whispers your name. Like our first kiss—nerves electric, world fading, just us. I love your quirks, your dreams, the way you fit perfectly in my chaos. You're not just loved; you're my universe. 🌌
                         </div>
-                        <img src="images/firstkiss.jpg" alt="Our first kiss" class="envelope-photo">
+                        <img src="firstlunch.jpg" alt="Our first kiss" class="envelope-photo">
                         <div class="surprise-reveal">Vow: I'll say it daily, in a thousand ways. You're etched in my soul.</div>
                     </div>
                 </div>
@@ -1083,7 +1312,6 @@
                         <div class="envelope-message">
                             Eman, you've opened my heart like no one else. Through every letter, I've shared pieces of me—the fears I hide (losing you terrifies me), the dreams (waking to you forever), the raw love that consumes me. You're my revelation.
                         </div>
-                        <img src="images/usfuture.jpg" alt="Our dreamed future" class="envelope-photo">
                         <div class="surprise-reveal">The surprise? This isn't just letters—it's my promise. Will you marry me someday? Yes, today, I ask with all my vulnerability. 💍💕 (Scroll to the end for more...)</div>
                     </div>
                 </div>
@@ -1105,16 +1333,16 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">First Date</div>
-                        <h3>A Night to Remember</h3>
-                        <p>Talking for hours felt like minutes. I couldn't stop smiling, and I still can't.</p>
+                        <h3>A Day to Remember</h3>
+                        <p>I came to university directly from te office in a yellow hoodie.</p>
                     </div>
                 </div>
                 <div class="timeline-item" style="--index: 3;">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">Growing Together</div>
-                        <h3>Every Day Gets Better</h3>
-                        <p>Building memories, sharing dreams, and falling more in love with you each day.</p>
+                        <h3>Dream to grow old with you</h3>
+                        <p>Building memories, sharing dreams,facing hardships,getting angry,the caree and falling more in love with you each day.</p>
                     </div>
                 </div>
                 <div class="timeline-item" style="--index: 4;">
@@ -1142,12 +1370,12 @@
                 <div class="wish-card" style="--index: 1;">
                     <div class="wish-icon">🌟</div>
                     <h3 class="wish-title">Dreams Come True</h3>
-                    <p>May all your dreams and aspirations become reality. I'll be here supporting you every step of the way.</p>
+                    <p>May all your dreams and aspirations become reality. I am here for you in any problem going internally or external world. </p>
                 </div>
                 <div class="wish-card" style="--index: 2;">
                     <div class="wish-icon">💖</div>
                     <h3 class="wish-title">Endless Love</h3>
-                    <p>My love for you grows stronger each day. Here's to a lifetime of happiness together.</p>
+                    <p>My love for you grows stronger each day. I really wanna spend my whole life with you.Marryy me sooon meri jaaaan</p>
                 </div>
                 <div class="wish-card" style="--index: 3;">
                     <div class="wish-icon">🎉</div>
@@ -1168,17 +1396,20 @@
         </section>
 
         <section class="video-message" id="videoSection">
-            <h2 class="video-title">A Special Message For You 💌</h2>
+            <h2 class="video-title">Song Dedicated To You💌</h2>
             <div class="video-container">
-                <iframe width="100%" height="450" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Special Message" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="100%" height="450" src="https://www.youtube.com/watch?v=cNGjD0VG4R8" title="Special Message" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <p style="margin-top: 30px; font-size: 1.2em; max-width: 600px; text-align: center;">This video is a little surprise to show how much you mean to me. Watch it and feel my love! ❤️</p>
+            <p style="margin-top: 30px; font-size: 1.2em; max-width: 600px; text-align: center;">This song is a definition of how much you mean to me. Hear it and feel my love! ❤️</p>
         </section>
 
         <section class="surprise-section" id="surpriseSection">
             <h2 style="margin-bottom: 40px; font-size: 3em;">One More Thing...</h2>
             <div class="gift-box" id="giftBox">
+                <div class="gift-lid"></div>
                 <div class="gift-bow">🎀</div>
+                <div class="gift-ribbon"></div>
+                <div class="gift-ribbon-horizontal"></div>
                 <div class="gift-text">Click to Open!</div>
             </div>
             <div class="surprise-message" id="surpriseMessage">
@@ -1191,7 +1422,7 @@
             </div>
         </section>
     </div>
-
+<!-- 
     <div class="navigation" id="navigation">
         <button class="nav-btn" onclick="scrollToSection('heroSection')">Home</button>
         <button class="nav-btn" onclick="scrollToSection('letterSection')">Love Letter</button>
@@ -1201,7 +1432,7 @@
         <button class="nav-btn" onclick="scrollToSection('wishesSection')">Wishes</button>
         <button class="nav-btn" onclick="scrollToSection('videoSection')">Video</button>
         <button class="nav-btn" onclick="scrollToSection('surpriseSection')">Surprise</button>
-    </div>
+    </div> -->
 
     <div id="easterEgg">
         <h3>Hidden Surprise! 🌹</h3>
@@ -1227,6 +1458,56 @@
             "Every day with you is a gift 🎁",
             "You inspire me daily 🌟"
         ];
+
+        // Floating love banner logic
+        function createLoveBanner(message) {
+            const banner = document.createElement('div');
+            banner.className = 'love-banner';
+            banner.textContent = message;
+            // Randomize font size (1em to 1.5em)
+            banner.style.fontSize = (Math.random() * 0.5 + 1) + 'em';
+            // Randomize color
+            const colors = ['#f093fb', '#f5576c', '#fd79a8', '#764ba2', '#ffb6c1', '#fa709a', '#fee140'];
+            banner.style.color = colors[Math.floor(Math.random() * colors.length)];
+            // Optionally add a little rotation
+            banner.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
+
+            // Randomize direction: 0=left->right, 1=right->left, 2=top->bottom, 3=bottom->top
+            const direction = Math.floor(Math.random() * 4);
+            // Randomize position along the edge
+            let duration = Math.random() * 8 + 8;
+            banner.style.animationDuration = duration + 's';
+            let keyframeClass = '';
+            if (direction === 0) { // left to right
+                banner.style.left = '-40vw';
+                banner.style.top = (Math.random() * 80) + 'vh';
+                keyframeClass = 'love-banner-lr';
+            } else if (direction === 1) { // right to left
+                banner.style.right = '-40vw';
+                banner.style.top = (Math.random() * 80) + 'vh';
+                keyframeClass = 'love-banner-rl';
+            } else if (direction === 2) { // top to bottom
+                banner.style.top = '-10vh';
+                banner.style.left = (Math.random() * 80) + 'vw';
+                keyframeClass = 'love-banner-tb';
+            } else { // bottom to top
+                banner.style.bottom = '-10vh';
+                banner.style.left = (Math.random() * 80) + 'vw';
+                keyframeClass = 'love-banner-bt';
+            }
+            banner.classList.add(keyframeClass);
+            document.getElementById('loveBannerContainer').appendChild(banner);
+            setTimeout(() => banner.remove(), duration * 1000);
+        }
+
+        function startLoveBanners() {
+            setInterval(() => {
+                const msg = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+                createLoveBanner(msg);
+            }, 2000);
+        }
+
+        startLoveBanners();
 
         const balloonEmojis = ['🎈', '🎈', '🎈', '🎈'];
         const confettiColors = ['#ff69b4', '#ff1493', '#db7093', '#ffc0cb', '#ffb6c1'];
@@ -1380,12 +1661,17 @@
         const surpriseMessage = document.getElementById('surpriseMessage');
 
         giftBox.addEventListener('click', (e) => {
-            giftBox.style.display = 'none';
-            surpriseMessage.classList.add('show');
-            createFirework(e.clientX, e.clientY);
-            setTimeout(() => createFirework(e.clientX + 100, e.clientY - 100), 200);
-            setTimeout(() => createFirework(e.clientX - 100, e.clientY + 100), 400);
-            setTimeout(() => createFirework(e.clientX + 50, e.clientY + 50), 600);
+            if (!giftBox.classList.contains('opened')) {
+                giftBox.classList.add('opened');
+                setTimeout(() => {
+                    giftBox.style.display = 'none';
+                    surpriseMessage.classList.add('show');
+                    createFirework(e.clientX, e.clientY);
+                    setTimeout(() => createFirework(e.clientX + 100, e.clientY - 100), 200);
+                    setTimeout(() => createFirework(e.clientX - 100, e.clientY + 100), 400);
+                    setTimeout(() => createFirework(e.clientX + 50, e.clientY + 50), 600);
+                }, 900);
+            }
         });
 
         function updateTogetherCountdown() {
@@ -1434,6 +1720,63 @@
             bgMusic.play().catch(() => {});
         });
     </script>
+    <style>
+    #loveBannerContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 10002;
+    }
+    .love-banner {
+        position: absolute;
+        white-space: nowrap;
+        font-family: 'Great Vibes', cursive, 'Poppins', sans-serif;
+        font-weight: bold;
+        text-shadow: 0 2px 8px #fff, 0 0 2px #f5576c;
+        opacity: 0.92;
+        pointer-events: none;
+        filter: drop-shadow(0 2px 8px #fd79a8);
+    }
+    .love-banner-lr {
+        animation: flyLoveBannerLR linear forwards;
+    }
+    .love-banner-rl {
+        animation: flyLoveBannerRL linear forwards;
+    }
+    .love-banner-tb {
+        animation: flyLoveBannerTB linear forwards;
+    }
+    .love-banner-bt {
+        animation: flyLoveBannerBT linear forwards;
+    }
+    @keyframes flyLoveBannerLR {
+        0% { left: -40vw; opacity: 0.7; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { left: 110vw; opacity: 0.7; }
+    }
+    @keyframes flyLoveBannerRL {
+        0% { right: -40vw; opacity: 0.7; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { right: 110vw; opacity: 0.7; }
+    }
+    @keyframes flyLoveBannerTB {
+        0% { top: -10vh; opacity: 0.7; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { top: 110vh; opacity: 0.7; }
+    }
+    @keyframes flyLoveBannerBT {
+        0% { bottom: -10vh; opacity: 0.7; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { bottom: 110vh; opacity: 0.7; }
+    }
+    </style>
 </body>
 
 </html>
