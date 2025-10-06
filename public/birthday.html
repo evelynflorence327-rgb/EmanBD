@@ -1233,7 +1233,7 @@
                     <div class="photo-caption">First Official Lunch - Our First Kiss</div>
                 </div>
                 <div class="photo-card">
-                    <video class="photo-img inline-video" controls playsinline preload="metadata" poster="EZcollage.jpg">
+                    <video class="photo-img inline-video" controls playsinline webkit-playsinline x5-playsinline muted preload="metadata" poster="EZcollage.jpg">
                         <source src="firstvlog.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -1241,7 +1241,7 @@
                     <div class="photo-caption">Our First Vlog - Just you and me</div>
                 </div>
                 <div class="photo-card">
-                    <video class="photo-img inline-video" controls playsinline preload="metadata" poster="EZcollage.jpg">
+                    <video class="photo-img inline-video" controls playsinline webkit-playsinline x5-playsinline muted preload="metadata" poster="EZcollage.jpg">
                         <source src="kababjees.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -1821,20 +1821,35 @@
         // (some browsers allow muted autoplay for <video> elements).
 
         function initInlineVideos() {
+            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
             const cards = document.querySelectorAll('.photo-card');
             cards.forEach(card => {
                 const video = card.querySelector('video.inline-video');
                 const overlay = card.querySelector('.video-play-overlay');
                 if (!video) return;
 
-                // Try muted autoplay first (may be allowed)
+                // Keep track if background music was playing before we start a video
+                let bgMusicWasPlaying = false;
+
+                // Ensure video is muted initially to increase chance of autoplay
                 video.muted = true;
+
+                // If device supports touch, proactively show overlay (mobile users expect tap)
+                if (isTouch) {
+                    overlay.style.display = 'block';
+                    overlay.textContent = '▶ Play';
+                }
+
+                // Try muted autoplay first (may be allowed)
                 const tryPlay = video.play();
                 if (tryPlay && tryPlay.then) {
                     tryPlay.then(() => {
-                        // Autoplay succeeded (muted) - show overlay so user can unmute
-                        overlay.style.display = 'block';
-                        overlay.textContent = 'Unmute';
+                        // Autoplay succeeded (muted)
+                        // If not touch, show an Unmute overlay so user can enable sound
+                        if (!isTouch) {
+                            overlay.style.display = 'block';
+                            overlay.textContent = 'Unmute';
+                        }
                     }).catch(() => {
                         // Autoplay blocked - show play overlay for user gesture
                         overlay.style.display = 'block';
@@ -1843,12 +1858,19 @@
                 } else {
                     // Older browsers - show overlay to be safe
                     overlay.style.display = 'block';
+                    overlay.textContent = '▶ Play';
                 }
 
                 // When overlay is clicked, unmute and play (user gesture)
                 overlay.addEventListener('click', async (e) => {
                     e.stopPropagation();
                     try {
+                        // Pause background music if it is playing
+                        if (bgMusic && !bgMusic.paused) {
+                            bgMusicWasPlaying = true;
+                            bgMusic.pause();
+                        }
+
                         video.muted = false;
                         await video.play();
                         overlay.style.transition = 'opacity 0.25s';
@@ -1859,10 +1881,31 @@
                     }
                 });
 
-                // If user taps the video itself, toggle play/pause
-                video.addEventListener('click', () => {
-                    if (video.paused) video.play().catch(() => {});
-                    else video.pause();
+                // If user taps the video itself, toggle play/pause and manage bg music
+                video.addEventListener('click', async () => {
+                    try {
+                        if (video.paused) {
+                            if (bgMusic && !bgMusic.paused) {
+                                bgMusicWasPlaying = true;
+                                bgMusic.pause();
+                            }
+                            await video.play();
+                        } else {
+                            video.pause();
+                        }
+                    } catch (e) {}
+                });
+
+                // When the video ends, resume background music if it was playing before
+                video.addEventListener('ended', () => {
+                    if (bgMusicWasPlaying && bgMusic) {
+                        bgMusic.play().catch(() => {});
+                        bgMusicWasPlaying = false;
+                    }
+                    // Show overlay again to allow replay
+                    overlay.style.display = 'block';
+                    overlay.style.opacity = '1';
+                    overlay.textContent = '▶ Replay';
                 });
             });
         }
