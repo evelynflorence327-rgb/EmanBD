@@ -397,6 +397,7 @@
             transition: transform 0.3s;
             cursor: pointer;
             transform-style: preserve-3d;
+            position: relative;
         }
 
         .photo-card:hover {
@@ -1232,11 +1233,19 @@
                     <div class="photo-caption">First Official Lunch - Our First Kiss</div>
                 </div>
                 <div class="photo-card">
-                    <video src="firstvlog.mp4" class="photo-img" controls poster="EZcollage.jpg"></video>
+                    <video class="photo-img inline-video" controls playsinline preload="metadata" poster="EZcollage.jpg">
+                        <source src="firstvlog.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <button class="video-play-overlay" aria-label="Play video" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;padding:12px 18px;border-radius:999px;border:none;background:rgba(0,0,0,0.6);color:#fff;font-size:1.1em;cursor:pointer;display:none;">▶ Play</button>
                     <div class="photo-caption">Our First Vlog - Just you and me</div>
                 </div>
                 <div class="photo-card">
-                    <video src="kababjees.mp4" class="photo-img" controls poster="EZcollage.jpg"></video>
+                    <video class="photo-img inline-video" controls playsinline preload="metadata" poster="EZcollage.jpg">
+                        <source src="kababjees.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <button class="video-play-overlay" aria-label="Play video" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;padding:12px 18px;border-radius:999px;border:none;background:rgba(0,0,0,0.6);color:#fff;font-size:1.1em;cursor:pointer;display:none;">▶ Play</button>
                     <div class="photo-caption">Cute Moments - Making memories Forever</div>
                 </div>
             </div>
@@ -1397,8 +1406,11 @@
 
         <section class="video-message" id="videoSection">
             <h2 class="video-title">Song Dedicated To You💌</h2>
-            <div class="video-container">
-                <iframe width="100%" height="450" src="https://www.youtube.com/watch?v=cNGjD0VG4R8" title="Special Message" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="video-container" style="position: relative;">
+                <!-- The YouTube IFrame API will replace this div with a player -->
+                <div id="videoPlayer"></div>
+                <!-- Overlay button to allow unmute/play with a user gesture -->
+                <button id="videoUnmuteBtn" aria-label="Play and unmute video" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1000;padding:18px 28px;border-radius:40px;border:none;background:rgba(0,0,0,0.6);color:#fff;font-size:1.1em;backdrop-filter:blur(4px);cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.4);">▶ Play / Unmute</button>
             </div>
             <p style="margin-top: 30px; font-size: 1.2em; max-width: 600px; text-align: center;">This song is a definition of how much you mean to me. Hear it and feel my love! ❤️</p>
         </section>
@@ -1719,6 +1731,148 @@
         window.addEventListener('load', () => {
             bgMusic.play().catch(() => {});
         });
+
+        // ------------------------
+        // YouTube IFrame API setup
+        // ------------------------
+        // Replace the static iframe with a YouTube player that autoplays muted.
+        // The API provides a way to programmatically unmute/play when the user
+        // clicks the overlay button (required by browser autoplay policies).
+
+        // Load the YouTube IFrame API script
+        (function loadYouTubeAPI() {
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        })();
+
+        // Player reference
+        let ytPlayer;
+        // Video ID from the previous embed URL (v=...)
+        const YT_VIDEO_ID = 'cNGjD0VG4R8';
+
+        // This function is called by the YouTube API once it's ready
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('videoPlayer', {
+                height: '450',
+                width: '100%',
+                videoId: YT_VIDEO_ID,
+                playerVars: {
+                    autoplay: 1,       // try to autoplay
+                    controls: 1,
+                    modestbranding: 1,
+                    rel: 0,
+                    playsinline: 1,
+                    mute: 1            // start muted (important for autoplay)
+                },
+                events: {
+                    onReady: onPlayerReady,
+                    onStateChange: onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Attempt to play muted (allowed by browsers)
+            event.target.mute();
+            const playPromise = event.target.playVideo && event.target.playVideo();
+            if (playPromise && playPromise.then) {
+                playPromise.catch(() => {
+                    // Autoplay failed; keep the overlay visible so user can click
+                    document.getElementById('videoUnmuteBtn').style.display = 'block';
+                }).then(() => {
+                    // Autoplay succeeded - show overlay so user can unmute when ready
+                    document.getElementById('videoUnmuteBtn').style.display = 'block';
+                });
+            } else {
+                // Older browsers: ensure overlay is visible
+                document.getElementById('videoUnmuteBtn').style.display = 'block';
+            }
+        }
+
+        function onPlayerStateChange(e) {
+            // If video ended, you could show a replay button etc.
+        }
+
+        // Overlay button: when user interacts, unmute and play
+        const unmuteBtn = document.getElementById('videoUnmuteBtn');
+        unmuteBtn.addEventListener('click', async function() {
+            if (!ytPlayer) return;
+            try {
+                // Unmute and ensure playing
+                ytPlayer.unMute();
+                ytPlayer.playVideo();
+                // Hide the overlay after user gesture
+                unmuteBtn.style.transition = 'opacity 0.3s';
+                unmuteBtn.style.opacity = '0';
+                setTimeout(() => unmuteBtn.style.display = 'none', 350);
+            } catch (err) {
+                // Fallback: try to focus player iframe and instruct user
+                unmuteBtn.textContent = 'Tap to Play';
+            }
+        });
+
+        // ------------------------
+        // Local MP4 playback helpers
+        // ------------------------
+        // Ensure uploaded MP4s play on mobile/desktop by adding a visible overlay
+        // that performs the required user gesture. Also attempt a muted autoplay
+        // (some browsers allow muted autoplay for <video> elements).
+
+        function initInlineVideos() {
+            const cards = document.querySelectorAll('.photo-card');
+            cards.forEach(card => {
+                const video = card.querySelector('video.inline-video');
+                const overlay = card.querySelector('.video-play-overlay');
+                if (!video) return;
+
+                // Try muted autoplay first (may be allowed)
+                video.muted = true;
+                const tryPlay = video.play();
+                if (tryPlay && tryPlay.then) {
+                    tryPlay.then(() => {
+                        // Autoplay succeeded (muted) - show overlay so user can unmute
+                        overlay.style.display = 'block';
+                        overlay.textContent = 'Unmute';
+                    }).catch(() => {
+                        // Autoplay blocked - show play overlay for user gesture
+                        overlay.style.display = 'block';
+                        overlay.textContent = '▶ Play';
+                    });
+                } else {
+                    // Older browsers - show overlay to be safe
+                    overlay.style.display = 'block';
+                }
+
+                // When overlay is clicked, unmute and play (user gesture)
+                overlay.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    try {
+                        video.muted = false;
+                        await video.play();
+                        overlay.style.transition = 'opacity 0.25s';
+                        overlay.style.opacity = '0';
+                        setTimeout(() => overlay.style.display = 'none', 300);
+                    } catch (err) {
+                        overlay.textContent = 'Tap to Play';
+                    }
+                });
+
+                // If user taps the video itself, toggle play/pause
+                video.addEventListener('click', () => {
+                    if (video.paused) video.play().catch(() => {});
+                    else video.pause();
+                });
+            });
+        }
+
+        // Initialize inline videos after the page is interactive
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(initInlineVideos, 200);
+        } else {
+            window.addEventListener('DOMContentLoaded', initInlineVideos);
+        }
     </script>
     <style>
     #loveBannerContainer {
